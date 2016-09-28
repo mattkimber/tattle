@@ -1,0 +1,17 @@
+## Directory-based project format:
+.idea/
+.vagrant/
+
+## File-based project format:
+*.ipr
+*.iws
+
+# node_modules
+node_modules
+
+# Terraform
+*.tfvars
+*.tfstate
+*.tfstate.backup
+.terraform/
+/.project

@@ -1,0 +1,14 @@
+{
+  "name": "tattle",
+  "version": "1.0.0",
+  "description": "Tattle is a platform for writing chatbots which respond to intent and parameters",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha"
+  },
+  "author": "Matt Kimber",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^3.1.0"
+  }
+}
