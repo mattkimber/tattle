@@ -1,6 +1,6 @@
 {
   "name": "tattle",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tattle is a platform for writing chatbots which respond to intent and parameters",
   "main": "index.js",
   "scripts": {

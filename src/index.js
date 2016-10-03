@@ -1,7 +1,16 @@
+var getTokens = function(input)
+{
+    return input
+        .toLowerCase()
+        .replace(/(?:\r\n|\r|\n)/g, " ")
+        .split(" ")
+        .filter((val) => val != "")
+}
+
 module.exports = function(intents) {
     return {
         getIntent: function(input) {
-            var tokens = input.toLowerCase().split(" ")
+            var tokens = getTokens(input)
 
             for(var i in intents) {
                 if(tokens.find((token) => intents[i].tokens.includes(token))) {
@@ -10,6 +19,7 @@ module.exports = function(intents) {
             }
         },
         getIntentWithParameters: function(input) {
+
             var intent = this.getIntent(input)            
             
             var returnValue = {
@@ -23,7 +33,7 @@ module.exports = function(intents) {
             }
 
             var parameters = intents[intent].parameters
-            var tokens = input.toLowerCase().split(" ")
+            var tokens = getTokens(input)
 
             for(var p in parameters) {
                 var tokenLocation = -1

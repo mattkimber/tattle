@@ -64,12 +64,21 @@ describe("Intent parsing", function() {
         var result = bot.getIntentWithParameters("find me lounges")
 
         assert.equal(result.isValid, false)
-
     })
 
     it("should not crash when getIntentWithParameters() is called with a non-valid intent", function() {
         var bot = tattle(intents)
 
         var result = bot.getIntentWithParameters("hello")        
+    })
+
+    it("should strip newlines from parameters", function() {
+        var bot = tattle(intents)
+
+        var result = bot.getIntentWithParameters("find me\r\nlounges \r in Gatwick \n terminal S\r\n")
+
+        assert.equal(result.parameters.airport, "gatwick")        
+        assert.equal(result.parameters.terminal, "s")
+        assert.equal(result.isValid, true)
     })
 })
