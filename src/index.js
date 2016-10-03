@@ -15,7 +15,8 @@ module.exports = function(intents) {
             
             var returnValue = {
                 intent: intent,
-                parameters: {}
+                parameters: {},
+                isValid: true
             }
 
             var tokens = input.toLowerCase().split(" ")
@@ -30,19 +31,28 @@ module.exports = function(intents) {
                         returnValue.parameters[p] = tokens[index + 1]
                     }                    
                 }
+
+                if(parameters[p].isMandatory && !returnValue.parameters[p]) {
+                    returnValue.isValid = false
+                }
             }
 
             return returnValue
         },
-        getHelpMessage: function() {
+        getHelpMessage: function(intent) {
             var response = ""
 
-            for(var i in intents) {
-                response += (response ? "\r\n" : "") + i + ": "
-                response += intents[i].tokens[0]
+            var intentsArray = intent ? { intent: intents[intent] } : intents;
 
-                for(var p in intents[i].parameters) {
-                    response += " " + intents[i].parameters[p].tokens[0] + " "
+            for(var i in intentsArray) {
+                if(!intent) {
+                    response += (response ? "\r\n" : "") + i + ": "                
+                }
+
+                response += intentsArray[i].tokens[0]
+
+                for(var p in intentsArray[i].parameters) {
+                    response += " " + intentsArray[i].parameters[p].tokens[0] + " "
                     response += "[" + p + "]"                     
                 }            
             }

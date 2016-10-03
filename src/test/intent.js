@@ -12,7 +12,8 @@ describe("Intent parsing", function() {
             tokens: [ "lounge", "lounges" ],
             parameters: {
                 airport: {
-                    tokens: [ "airport", "in" ]
+                    tokens: [ "airport", "in" ],
+                    isMandatory: true
                 },
                 terminal: {
                     tokens: [ "terminal" ]
@@ -44,6 +45,7 @@ describe("Intent parsing", function() {
         var result = bot.getIntentWithParameters("find me lounges in Gatwick")
 
         assert.equal(result.parameters.airport, "gatwick")
+        assert.equal(result.isValid, true)
     })
 
     it("should parse multiple parameters from a text string", function() {
@@ -53,5 +55,15 @@ describe("Intent parsing", function() {
 
         assert.equal(result.parameters.airport, "gatwick")        
         assert.equal(result.parameters.terminal, "s")
+        assert.equal(result.isValid, true)
+    })
+
+    it("should mark an intent as invalid when parameters are missing", function() {
+        var bot = tattle(intents)
+
+        var result = bot.getIntentWithParameters("find me lounges")
+
+        assert.equal(result.isValid, false)
+
     })
 })
