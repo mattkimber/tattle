@@ -10,8 +10,7 @@ module.exports = function(intents) {
             }
         },
         getIntentWithParameters: function(input) {
-            var intent = this.getIntent(input)
-            var parameters = intents[intent].parameters
+            var intent = this.getIntent(input)            
             
             var returnValue = {
                 intent: intent,
@@ -19,6 +18,11 @@ module.exports = function(intents) {
                 isValid: true
             }
 
+            if(!intent) {
+                return returnValue
+            }
+
+            var parameters = intents[intent].parameters
             var tokens = input.toLowerCase().split(" ")
 
             for(var p in parameters) {

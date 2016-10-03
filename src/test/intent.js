@@ -66,4 +66,10 @@ describe("Intent parsing", function() {
         assert.equal(result.isValid, false)
 
     })
+
+    it("should not crash when getIntentWithParameters() is called with a non-valid intent", function() {
+        var bot = tattle(intents)
+
+        var result = bot.getIntentWithParameters("hello")        
+    })
 })
